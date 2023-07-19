@@ -23,16 +23,9 @@ rep = 0
 while rep <= int(count):
     html = urlopen(url, context=ctx).read()
     soup = BeautifulSoup(html, "html.parser")
-
 # Retrieve all of the anchor tags
     tags = soup('a')
-
 # Look at the parts of a tag
     print('Retrieving: ' + url)
-    
-#    print('TAG:', tags[int(position)-1])
-#    print('URL:', tags[int(position)-1].get('href', None))
-#    print('Contents:', tags[int(position)-1].contents[0])
-#    print('Attrs:', tags[int(position)-1].attrs)
     url = tags[int(position)-1].get('href', None)
     rep += 1
