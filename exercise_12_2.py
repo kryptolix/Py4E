@@ -1,6 +1,8 @@
-import urllib.request
-import urllib.parse
-import urllib.error
+# To run this, download the BeautifulSoup zip file
+# http://www.py4e.com/code3/bs4.zip
+# and unzip it in the same directory as this file
+
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import ssl
 
@@ -10,30 +12,12 @@ ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
 url = input('Enter - ')
-html = urllib.request.urlopen(url, context=ctx).read()
-soup = BeautifulSoup(html, 'html.parser')
+html = urlopen(url, context=ctx).read()
+soup = BeautifulSoup(html, "html.parser")
 
-# Retrieve all of the anchor tags
-tags = soup('a')
+sum = 0
+tags = soup('span')
 for tag in tags:
-    print(tag.get('href', None))
+    sum += int(tag.contents[0])
 
-#start_url = input("Enter URL: ")
-#count_input = input("Enter count: ")
-#position_input = input("Enter position: ")
-#count = 0
-
-#while int(count) <= int(count_input):
-#    count += 1
-#    f_hand = urllib.request.urlopen(start_url)
-#    print("Retrieving: " + str(start_url))
-#    position = 0
-#    for line in f_hand:
-#        linestring = line.decode().strip()
-#        if "href" in linestring:
-#            position += 1
-#            if position == int(position_input):
-#                test = linestring.split('>')
-#                url_list = test[1].split('"')
-#                start_url = str(url_list[1])
-
+print(sum)
